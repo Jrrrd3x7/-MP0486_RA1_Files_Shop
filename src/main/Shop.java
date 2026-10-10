@@ -33,7 +33,7 @@ public class Shop {
 		sales = new ArrayList<Sale>();
 	}
 	
-	
+	 
 
 	public Amount getCash() {
 		return cash;
