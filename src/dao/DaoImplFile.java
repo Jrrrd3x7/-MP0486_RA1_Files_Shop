@@ -11,7 +11,7 @@ import model.Amount;
 import model.Employee;
 import model.Product;
 
-public class DaoImpFile implements Dao {
+public class DaoImplFile implements Dao {
 
 	@Override
 	public void connect() {
