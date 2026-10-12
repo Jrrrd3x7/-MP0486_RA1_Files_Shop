@@ -6,7 +6,7 @@ import model.Employee;
 import model.Product;
 
 public interface Dao {
-	
+
 	public void connect();
 
 	public void disconnect();
@@ -15,4 +15,3 @@ public interface Dao {
 
 	public ArrayList<Product> getInventory();
 }
-
