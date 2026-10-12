@@ -31,6 +31,7 @@ public class Shop {
 	private int numberSales;
 
 	final static double TAX_RATE = 1.04;
+
 	private DaoImplFile dao = new DaoImplFile();
 
 	public Shop() {
@@ -197,7 +198,7 @@ public class Shop {
 	 * read inventory from file
 	 */
 	private void readInventory() {
-		dao.getInventory();
+		inventory = dao.getInventory();
 	}
 
 	/**
