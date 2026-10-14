@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.Amount;
@@ -99,5 +102,42 @@ public class DaoImplFile implements Dao {
 			e.printStackTrace();
 		}
 		return inventory;
+	}
+	public boolean writeInventory(ArrayList<Product> inventory) {
+		LocalDate myObj = LocalDate.now();
+		String fileName = "inventory_" + myObj.toString() + ".txt";
+
+		// locate file, path and name
+		File folder = new File(System.getProperty("user.dir") + File.separator + "files");
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		File f = new File(folder, fileName);
+
+		// wrap in proper classes and close automatically
+		try (FileWriter fw = new FileWriter(f, true); PrintWriter pw = new PrintWriter(fw)) {
+
+			// write line by line
+			int counterProduct = 1;
+			for (Product product : inventory) {
+				// format first line TO BE -> 1;Product=Manzana;
+				pw.println(counterProduct + ";Product=" + product.getName() + ";");
+
+				// format second line TO BE -> 1;Wholesaler Price=10.0€;Public Price=20.0€;
+				pw.println(counterProduct + ";Wholesaler Price=" + product.getWholesalerPrice() + ";Public Price="
+						+ product.getPublicPrice() + ";");
+
+				// format third line TO BE -> 1;Stock=50;
+				pw.println(counterProduct + ";Stock=" + product.getStock() + ";");
+
+				// increment counter products
+				counterProduct++;
+			}
+			return true;
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
