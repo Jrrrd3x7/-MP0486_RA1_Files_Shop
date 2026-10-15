@@ -200,6 +200,10 @@ public class Shop {
 	private void readInventory() {
 		inventory = dao.getInventory();
 	}
+	public boolean writeInventory() {
+		return dao.writeInventory(inventory);
+		
+	}
 
 	/**
 	 * show current total cash
