@@ -10,6 +10,7 @@ import main.Shop;
 import utils.Constants;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
@@ -26,6 +27,7 @@ public class ShopView extends JFrame implements ActionListener, KeyListener {
 	private Shop shop;
 
 	private JPanel contentPane;
+	private JButton btnExportInventory;
 	private JButton btnShowCash;
 	private JButton btnAddProduct;
 	private JButton btnAddStock;
@@ -83,13 +85,13 @@ public class ShopView extends JFrame implements ActionListener, KeyListener {
 		contentPane.add(lblShowCash);
 
 		// Export inventory
-		btnShowCash = new JButton("0. Exportar inventario");
-		btnShowCash.setHorizontalAlignment(SwingConstants.LEFT);
-		btnShowCash.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnShowCash.setBounds(99, 40, 236, 40);
-		contentPane.add(btnShowCash);
+		btnExportInventory = new JButton("0. Exportar inventario");
+		btnExportInventory.setHorizontalAlignment(SwingConstants.LEFT);
+		btnExportInventory.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnExportInventory.setBounds(99, 40, 236, 40);
+		contentPane.add(btnExportInventory);
 		// listen button
-		btnShowCash.addActionListener(this);
+		btnExportInventory.addActionListener(this);
 
 		// option count cash
 		btnShowCash = new JButton("1. Contar caja");
@@ -136,7 +138,10 @@ public class ShopView extends JFrame implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+
+		if (e.getKeyChar() == '0') {
+			this.exportInventory();
+		}
 		if (e.getKeyChar() == '1') {
 			this.openCashView();
 		}
@@ -160,7 +165,10 @@ public class ShopView extends JFrame implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+
+		if (e.getSource() == btnExportInventory) {
+			this.exportInventory();
+		}
 		if (e.getSource() == btnShowCash) {
 			this.openCashView();
 		}
@@ -174,6 +182,19 @@ public class ShopView extends JFrame implements ActionListener, KeyListener {
 			this.openProductView(Constants.OPTION_REMOVE_PRODUCT);
 		}
 
+	}
+
+	/**
+	 * open dialog to export inventory
+	 */
+	public void exportInventory() {
+		if (shop.writeInventory()) {
+			JOptionPane.showMessageDialog(this, "Inventario exportado correctamente!", "Exportar inventario",
+					JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(this, "Error al exportar inventario", "Exportar inventario",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	/**
