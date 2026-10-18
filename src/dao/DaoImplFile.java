@@ -103,6 +103,7 @@ public class DaoImplFile implements Dao {
 		}
 		return inventory;
 	}
+
 	public boolean writeInventory(ArrayList<Product> inventory) {
 		LocalDate myObj = LocalDate.now();
 		String fileName = "inventory_" + myObj.toString() + ".txt";
@@ -115,24 +116,18 @@ public class DaoImplFile implements Dao {
 		File f = new File(folder, fileName);
 
 		// wrap in proper classes and close automatically
-		try (FileWriter fw = new FileWriter(f, true); PrintWriter pw = new PrintWriter(fw)) {
+		try (FileWriter fw = new FileWriter(f); PrintWriter pw = new PrintWriter(fw)) {
 
 			// write line by line
 			int counterProduct = 1;
 			for (Product product : inventory) {
 				// format first line TO BE -> 1;Product=Manzana;
-				pw.println(counterProduct + ";Product=" + product.getName() + ";");
-
-				// format second line TO BE -> 1;Wholesaler Price=10.0€;Public Price=20.0€;
-				pw.println(counterProduct + ";Wholesaler Price=" + product.getWholesalerPrice() + ";Public Price="
-						+ product.getPublicPrice() + ";");
-
-				// format third line TO BE -> 1;Stock=50;
-				pw.println(counterProduct + ";Stock=" + product.getStock() + ";");
+				pw.println(counterProduct + ";Product:" + product.getName() + ";Stock:" + product.getStock() + ";");
 
 				// increment counter products
 				counterProduct++;
 			}
+			pw.println(counterProduct + ";Total number of products:" + inventory.size() + ";");
 			return true;
 
 		} catch (IOException e) {
