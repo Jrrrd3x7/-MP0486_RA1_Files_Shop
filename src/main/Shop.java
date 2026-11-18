@@ -32,7 +32,7 @@ public class Shop {
 
 	final static double TAX_RATE = 1.04;
 
-	private DaoImplFile dao = new DaoImplFile();
+	private Dao dao = new DaoImplJDBC();
 
 	public Shop() {
 		inventory = new ArrayList<Product>();
