@@ -186,12 +186,18 @@ public class Shop {
 	 * load initial inventory to shop
 	 */
 	public void loadInventory() {
+		dao.connect();
+		this.readInventory();
+		dao.disconnect();
+		for (Product product : inventory) {
+			System.out.println(product);
+		}
 //		addProduct(new Product("Manzana", new Amount(10.00), true, 10));
 //		addProduct(new Product("Pera", new Amount(20.00), true, 20));
 //		addProduct(new Product("Hamburguesa", new Amount(30.00), true, 30));
 //		addProduct(new Product("Fresa", new Amount(5.00), true, 20));
 		// now read from file
-		this.readInventory();
+
 	}
 
 	/**
@@ -200,9 +206,10 @@ public class Shop {
 	private void readInventory() {
 		inventory = dao.getInventory();
 	}
+
 	public boolean writeInventory() {
 		return dao.writeInventory(inventory);
-		
+
 	}
 
 	/**
