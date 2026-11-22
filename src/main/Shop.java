@@ -208,7 +208,10 @@ public class Shop {
 	}
 
 	public boolean writeInventory() {
-		return dao.writeInventory(inventory);
+		dao.connect();
+		boolean result = dao.writeInventory(inventory);
+		dao.disconnect();
+		return result;
 
 	}
 
