@@ -231,6 +231,17 @@ public class Shop {
 		return result;
 
 	}
+	
+	public boolean deleteProduct(Product product) {
+		dao.connect();
+		
+		boolean result = dao.deleteProduct(product);
+		
+		dao.disconnect();
+		
+		return result;
+	}
+	
 
 	/**
 	 * show current total cash

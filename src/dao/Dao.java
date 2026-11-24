@@ -19,4 +19,6 @@ public interface Dao {
 
 	public boolean addProduct(Product product);
 
+	public boolean deleteProduct(Product product);
+
 }
