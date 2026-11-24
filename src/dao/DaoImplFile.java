@@ -135,4 +135,12 @@ public class DaoImplFile implements Dao {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean addProduct(Product product) {
+		
+		return false;
+	}
+	
+
 }
