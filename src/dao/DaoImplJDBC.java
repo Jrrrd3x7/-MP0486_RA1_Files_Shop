@@ -150,4 +150,22 @@ public class DaoImplJDBC implements Dao {
 		return false;
 	}
 
+	@Override
+	public boolean deleteProduct(Product product) {
+		System.out.println("He entrado en deleteProduct()");
+		String query = "DELETE FROM inventory WHERE name = ?";
+
+		try (PreparedStatement ps = connection.prepareStatement(query)) {
+			ps.setString(1, product.getName());
+			System.out.println("Nombre que intento borrar: " + product.getName());
+			int rowsAffected = ps.executeUpdate();
+
+			return rowsAffected > 0;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
 }
