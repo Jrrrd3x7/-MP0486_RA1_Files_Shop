@@ -207,10 +207,27 @@ public class Shop {
 		inventory = dao.getInventory();
 	}
 
+	/**
+	 * writeInventory from JDBC
+	 */
 	public boolean writeInventory() {
 		dao.connect();
 		boolean result = dao.writeInventory(inventory);
 		dao.disconnect();
+		return result;
+
+	}
+
+	/**
+	 * addProduct to JDBC
+	 */
+	public boolean addProduct(Product product) {
+		dao.connect();
+
+		boolean result = dao.addProduct(product);
+
+		dao.disconnect();
+
 		return result;
 
 	}
@@ -476,15 +493,13 @@ public class Shop {
 	 * add a product to inventory
 	 * 
 	 * @param product
+	 * 
+	 *                public void addProduct(Product product) { if
+	 *                (isInventoryFull()) { System.out.println("No se pueden añadir
+	 *                más productos, se ha alcanzado el máximo de " +
+	 *                inventory.size()); return; } inventory.add(product);
+	 *                numberProducts++; } ----------------------------
 	 */
-	public void addProduct(Product product) {
-		if (isInventoryFull()) {
-			System.out.println("No se pueden añadir más productos, se ha alcanzado el máximo de " + inventory.size());
-			return;
-		}
-		inventory.add(product);
-		numberProducts++;
-	}
 
 	/**
 	 * check if inventory is full or not

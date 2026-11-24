@@ -130,4 +130,24 @@ public class DaoImplJDBC implements Dao {
 		return success;
 	}
 
+	@Override
+	public boolean addProduct(Product product) {
+		String query = "INSERT INTO inventory " + "(name, wholesalerPrice, available, stock) " + "VALUES(?,?,?,?)";
+
+		try (PreparedStatement ps = connection.prepareStatement(query)) {
+
+			ps.setString(1, product.getName());
+			ps.setDouble(2, product.getWholesalerPrice().getValue());
+			ps.setBoolean(3, product.isAvailable());
+			ps.setInt(4, product.getStock());
+
+			ps.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }
