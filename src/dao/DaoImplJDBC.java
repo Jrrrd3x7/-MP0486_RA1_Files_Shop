@@ -152,7 +152,6 @@ public class DaoImplJDBC implements Dao {
 
 	@Override
 	public boolean deleteProduct(Product product) {
-		System.out.println("He entrado en deleteProduct()");
 		String query = "DELETE FROM inventory WHERE name = ?";
 
 		try (PreparedStatement ps = connection.prepareStatement(query)) {
