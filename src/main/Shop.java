@@ -225,7 +225,7 @@ public class Shop {
 		dao.connect();
 
 		boolean result = dao.addProduct(product);
-
+		inventory.add(product);
 		dao.disconnect();
 
 		return result;
@@ -236,7 +236,7 @@ public class Shop {
 		dao.connect();
 
 		boolean result = dao.deleteProduct(product);
-
+		inventory.remove(product);
 		dao.disconnect();
 
 		return result;
