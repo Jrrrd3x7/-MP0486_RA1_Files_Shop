@@ -141,11 +141,16 @@ public class DaoImplFile implements Dao {
 
 		return false;
 	}
-	
+
 	@Override
 	public boolean deleteProduct(Product product) {
 		return false;
 
 	}
-	
+
+	@Override
+	public boolean updateProduct(Product product) {
+		return false;
+	}
+
 }

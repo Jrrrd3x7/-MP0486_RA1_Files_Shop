@@ -167,4 +167,25 @@ public class DaoImplJDBC implements Dao {
 		}
 
 	}
+
+	@Override
+	public boolean updateProduct(Product product) {
+		String query = "UPDATE inventory SET stock = ? WHERE name = ? ";
+
+		try (PreparedStatement ps = connection.prepareStatement(query)) {
+
+			ps.setInt(1, product.getStock());
+			ps.setString(2, product.getName());
+
+			int rowsAffected = ps.executeUpdate();
+
+			return rowsAffected > 0;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+	}
 }
